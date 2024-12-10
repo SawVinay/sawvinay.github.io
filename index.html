@@ -3,130 +3,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wavy - Creative Landing Page</title>
+    <title>Wavy - Modern Web Experience</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header class="header">
-        <div class="container">
-            <nav class="navbar">
-                <div class="logo">
-                    <img src="logo.png" alt="Wavy Logo">
-                </div>
-                <ul class="nav-menu">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#features">Features</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#pricing">Pricing</a></li>
-                    <li><a href="#contact" class="btn btn-primary">Contact</a></li>
-                </ul>
-                <div class="hamburger">
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                </div>
-            </nav>
-        </div>
+        <nav class="navbar container">
+            <div class="logo">
+                <img src="logo.svg" alt="Wavy Logo">
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#contact" class="btn btn-primary">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </nav>
     </header>
 
     <main>
-        <section id="home" class="hero">
+        <section id="home" class="hero smooth-section">
             <div class="container">
                 <div class="hero-content">
-                    <h1>Powerful Website Solution</h1>
-                    <p>Create stunning websites with our innovative platform</p>
+                    <h1>Revolutionize Your Digital Experience</h1>
+                    <p>Seamless design, powerful functionality, and intuitive user experience.</p>
                     <div class="hero-cta">
-                        <a href="#" class="btn btn-primary">Get Started</a>
-                        <a href="#" class="btn btn-secondary">Learn More</a>
+                        <a href="#features" class="btn btn-primary">Get Started</a>
+                        <a href="#about" class="btn btn-secondary">Learn More</a>
                     </div>
                 </div>
                 <div class="hero-image">
-                    <img src="hero-mockup.png" alt="Website Mockup">
+                    <img src="hero-illustration.svg" alt="Hero Illustration">
                 </div>
             </div>
         </section>
 
-        <section id="features" class="features">
+        <section id="features" class="features smooth-section">
             <div class="container">
-                <h2>Amazing Features</h2>
+                <h2>Our Key Features</h2>
                 <div class="feature-grid">
-                    <div class="feature-item">
-                        <i class="fas fa-mobile-alt"></i>
-                        <h3>Responsive Design</h3>
-                        <p>Fully responsive and mobile-friendly design</p>
-                    </div>
-                    <div class="feature-item">
-                        <i class="fas fa-palette"></i>
-                        <h3>Customizable</h3>
-                        <p>Easily customize to match your brand</p>
-                    </div>
                     <div class="feature-item">
                         <i class="fas fa-rocket"></i>
                         <h3>Fast Performance</h3>
-                        <p>Optimized for speed and efficiency</p>
+                        <p>Optimized for speed and efficiency.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-lock"></i>
+                        <h3>Secure Platform</h3>
+                        <p>Advanced security measures implemented.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-layer-group"></i>
+                        <h3>Scalable Design</h3>
+                        <p>Adaptable to your growing needs.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="about" class="about">
+        <section id="pricing" class="pricing smooth-section">
             <div class="container">
-                <div class="about-content">
-                    <h2>About Our Platform</h2>
-                    <p>We provide cutting-edge web solutions that help businesses grow online. Our platform is designed to make website creation simple and powerful.</p>
-                    <ul class="about-list">
-                        <li>Easy to use interface</li>
-                        <li>Professional templates</li>
-                        <li>24/7 Customer support</li>
-                    </ul>
-                    <a href="#" class="btn btn-primary">Learn More</a>
-                </div>
-                <div class="about-image">
-                    <img src="about-image.png" alt="About Us">
-                </div>
-            </div>
-        </section>
-
-        <section id="pricing" class="pricing">
-            <div class="container">
-                <h2>Pricing Plans</h2>
+                <h2>Flexible Pricing Plans</h2>
                 <div class="pricing-grid">
                     <div class="pricing-card">
-                        <h3>Basic Plan</h3>
-                        <p class="price">$9.99/month</p>
+                        <h3>Starter</h3>
+                        <div class="price">$19/month</div>
                         <ul>
                             <li>Basic Features</li>
                             <li>Limited Support</li>
-                            <li>1 Website</li>
+                            <li>1 User</li>
                         </ul>
                         <a href="#" class="btn btn-primary">Choose Plan</a>
                     </div>
                     <div class="pricing-card featured">
-                        <h3>Pro Plan</h3>
-                        <p class="price">$19.99/month</p>
+                        <h3>Pro</h3>
+                        <div class="price">$49/month</div>
                         <ul>
                             <li>Advanced Features</li>
                             <li>Priority Support</li>
-                            <li>Unlimited Websites</li>
+                            <li>5 Users</li>
                         </ul>
                         <a href="#" class="btn btn-secondary">Choose Plan</a>
                     </div>
                     <div class="pricing-card">
                         <h3>Enterprise</h3>
-                        <p class="price">$49.99/month</p>
+                        <div class="price">$99/month</div>
                         <ul>
                             <li>Full Features</li>
-                            <li>Dedicated Support</li>
-                            <li>Custom Solutions</li>
+                            <li>24/7 Support</li>
+                            <li>Unlimited Users</li>
                         </ul>
-                        <a href="#" class="btn btn-primary">Contact Sales</a>
+                        <a href="#" class="btn btn-primary">Choose Plan</a>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="contact" class="contact">
+        <section id="contact" class="contact smooth-section">
             <div class="container">
                 <h2>Contact Us</h2>
                 <form class="contact-form">
@@ -143,20 +126,20 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-logo">
-                    <img src="logo.png" alt="Wavy Logo">
+                    <img src="logo-white.svg" alt="Wavy Logo">
                 </div>
                 <div class="footer-links">
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Terms of Service</a>
-                    <a href="#">Support</a>
+                    <a href="#home">Home</a>
+                    <a href="#features">Features</a>
+                    <a href="#pricing">Pricing</a>
                 </div>
                 <div class="social-icons">
-                    <a href="#"><i class="fab fa-facebook"></i></a>
                     <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
                 </div>
             </div>
-            <p>&copy; 2023 Wavy. All Rights Reserved.</p>
+            <p>&copy; 2024 Wavy. All Rights Reserved.</p>
         </div>
     </footer>
 
