@@ -1,4 +1,69 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Smooth Scroll Function
+    function smoothScroll(target, duration = 800) {
+        const targetPosition = target.getBoundingClientRect().top + window.pageYOffset;
+        const startPosition = window.pageYOffset;
+        const distance = targetPosition - startPosition;
+        let startTime = null;
+
+        function animation(currentTime) {
+            if (startTime === null) startTime = currentTime;
+            const timeElapsed = currentTime - startTime;
+            const run = easeInOutCubic(timeElapsed, startPosition, distance, duration);
+            window.scrollTo(0, run);
+            if (timeElapsed < duration) {
+                requestAnimationFrame(animation);
+            }
+        }
+
+        // Easing function for smooth scroll
+        function easeInOutCubic(t, b, c, d) {
+            t /= d / 2;
+            if (t < 1) return c / 2 * t * t * t + b;
+            t -= 2;
+            return c / 2 * (t * t * t + 2) + b;
+        }
+
+        requestAnimationFrame(animation);
+    }
+
+    // Navigation Scroll
+    const navLinks = document.querySelectorAll('a[href^="#"]');
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = link.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            
+            if (targetElement) {
+                smoothScroll(targetElement);
+            }
+        });
+    });
+
+    // Intersection Observer for Smooth Sections
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+    };
+
+    const sectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            } else {
+                entry.target.classList.remove('visible');
+            }
+        });
+    }, observerOptions);
+
+    // Observe all smooth sections
+    const smoothSections = document.querySelectorAll('.smooth-section');
+    smoothSections.forEach(section => {
+        sectionObserver.observe(section);
+    });
+
     // Mobile Navigation Toggle
     const hamburger = document.querySelector('.hamburger');
     const navMenu = document.querySelector('.nav-menu');
@@ -8,8 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
         navMenu.classList.toggle('active');
     });
 
-    // Close mobile menu when a nav link is clicked
-    const navLinks = document.querySelectorAll('.nav-menu a');
+    // Close mobile menu when a link is clicked
     navLinks.forEach(link => {
         link.addEventListener('click', () => {
             hamburger.classList.remove('active');
@@ -17,22 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Smooth Scrolling for Navigation
-    navLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            const targetId = link.getAttribute('href');
-            const targetSection = document.querySelector(targetId);
-            
-            if (targetSection) {
-                targetSection.scrollIntoView({
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
-
-    // Sticky Header on Scroll
+    // Scroll Header Effect
     const header = document.querySelector('.header');
     window.addEventListener('scroll', () => {
         if (window.scrollY > 50) {
@@ -42,126 +91,105 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Form Submission Handler
+    // Form Submission Handling
     const contactForm = document.querySelector('.contact-form');
     if (contactForm) {
         contactForm.addEventListener('submit', (e) => {
             e.preventDefault();
             
             // Basic form validation
-            const name = contactForm.querySelector('input[type="text"]');
-            const email = contactForm.querySelector('input[type="email"]');
-            const message = contactForm.querySelector('textarea');
+            const inputs = contactForm.querySelectorAll('input, textarea');
+            let isValid = true;
 
-            if (name.value.trim() === '' || 
-                email.value.trim() === '' || 
-                message.value.trim() === '') {
-                alert('Please fill in all fields');
-                return;
+            inputs.forEach(input => {
+                if (!input.value.trim()) {
+                    isValid = false;
+                    input.style.borderColor = 'red';
+                } else {
+                    input.style.borderColor = '';
+                }
+            });
+
+            if (isValid) {
+                // Simulate form submission
+                showNotification('Message sent successfully!', 'success');
+                contactForm.reset();
+            } else {
+                showNotification('Please fill all fields', 'error');
             }
-
-            // Simulated form submission
-            alert('Message sent successfully!');
-            contactForm.reset();
         });
     }
 
-    // Pricing Card Hover Effects
-    const pricingCards = document.querySelectorAll('.pricing-card');
-    pricingCards.forEach(card => {
-        card.addEventListener('mouseenter', () => {
-            card.classList.add('hover');
-        });
+    // Notification System
+    function showNotification(message, type) {
+        const notification = document.createElement('div');
+        notification.className = `notification ${type}`;
+        notification.textContent = message;
+        document.body.appendChild(notification);
 
-        card.addEventListener('mouseleave', () => {
-            card.classList.remove('hover');
-        });
+        setTimeout(() => {
+            notification.classList.add('show');
+        }, 10);
+
+        setTimeout(() => {
+            notification.classList.remove('show');
+            setTimeout(() => {
+                document.body.removeChild(notification);
+            }, 300);
+        }, 3000);
+    }
+
+    // Performance Monitoring
+    window.addEventListener('load', () => {
+        const loadTime = window.performance.timing.loadEventEnd - 
+                         window.performance.timing.navigationStart;
+        console.log(`Page loaded in ${loadTime}ms`);
     });
 
-    // Animated Number Counters
-    function animateCounters() {
-        const counters = document.querySelectorAll('.counter');
-        counters.forEach(counter => {
-            const target = +counter.getAttribute('data-target');
-            const duration = 2000; // Animation duration in ms
-            
-            const updateCounter = () => {
-                const count = +counter.innerText;
-                const increment = target / duration * 10;
-                
-                if (count < target) {
-                    counter.innerText = Math.ceil(count + increment);
-                    setTimeout(updateCounter, 10);
-                } else {
-                    counter.innerText = target;
-                }
-            };
-            
-            updateCounter();
-        });
-    }
-
-    // Intersection Observer for Animations
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.1
-    };
-
-    const fadeInObserver = new IntersectionObserver((entries) => {
+    // Lazy Loading Images
+    const lazyImages = document.querySelectorAll('img[data-src]');
+    const lazyImageObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('fade-in');
-                
-                // Trigger counter animation when section is in view
-                if (entry.target.classList.contains('features')) {
-                    animateCounters();
-                }
+                const img = entry.target;
+                img.src = img.dataset.src;
+                img.classList.add('loaded');
+                observer.unobserve(img);
             }
         });
-    }, observerOptions);
-
-    // Apply fade-in animation to sections
-    const sections = document.querySelectorAll('section');
-    sections.forEach(section => {
-        fadeInObserver.observe(section);
     });
 
-    // Parallax Effect for Hero Section
-    window.addEventListener('mousemove', (e) => {
-        const hero = document.querySelector('.hero');
-        const heroImage = document.querySelector('.hero-image img');
-        
-        if (hero && heroImage) {
-            const moveX = (e.clientX * -1) / 50;
-            const moveY = (e.clientY * -1) / 50;
-            
-            heroImage.style.transform = `translate(${moveX}px, ${moveY}px)`;
-        }
-    });
+    lazyImages.forEach(img => lazyImageObserver.observe(img));
 
-    // Dark Mode Toggle (Optional)
-    const darkModeToggle = document.getElementById('dark-mode-toggle');
-    if (darkModeToggle) {
-        darkModeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
-        });
+    // Additional Styles for Notifications
+    const styles = `
+    .notification {
+        position: fixed;
+        top: 20px;
+        right: -300px;
+        padding: 15px;
+        background-color: #333;
+        color: white;
+        border-radius: 5px;
+        transition: right 0.3s ease;
+        z-index: 1000;
     }
-});
+    .notification.show {
+        right: 20px;
+    }
+    .notification.success {
+        background-color: #4CAF50;
+    }
+    .notification.error {
+        background-color: #f44336;
+    }
+    .header.scrolled {
+        background: rgba(106, 17, 203, 0.9);
+        backdrop-filter: blur(10px);
+    }`;
 
-// Performance Optimization: Debounce Function
-function debounce(func, wait = 20, immediate = true) {
-    let timeout;
-    return function() {
-        const context = this;
-        const args = arguments;
-        const later = function() {
-            timeout = null;
-            if (!immediate) func.apply(context, args);
-        };
-        const callNow = immediate && !timeout;
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-        if (callNow) func.apply(context, args);
-    };
-}
+    const styleSheet = document.createElement("style");
+    styleSheet.type = "text/css";
+    styleSheet.innerText = styles;
+    document.head.appendChild(styleSheet);
+});
